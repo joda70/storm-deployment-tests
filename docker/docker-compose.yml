@@ -1,0 +1,59 @@
+version: '2.1'
+
+networks:
+  cnaf.infn.it:
+    name: cnaf.infn.it
+
+services:
+
+  data:
+    container_name: data
+    image: busybox
+    volumes:
+      - ${STORAGE_PREFIX:-/storage}
+
+  docker-storm-testsuite:
+    container_name: docker-storm-testsuite
+    dns_search: cnaf.infn.it
+    hostname: docker-storm-testsuite.cnaf.infn.it
+    image: italiangrid/storm-testsuite:latest
+    environment:
+      TESTSUITE_BRANCH: ${TESTSUITE_BRANCH:-master}
+      TESTSUITE_EXCLUDE: ${TESTSUITE_EXCLUDE:-to-be-fixedORno-btrfsORcdmi}
+    depends_on:
+      - docker-storm
+    networks:
+      cnaf.infn.it:
+        aliases:
+          - docker-storm-testsuite.cnaf.infn.it
+
+  docker-storm:
+    container_name: docker-storm
+    dns_search: cnaf.infn.it
+    hostname: docker-storm.cnaf.infn.it
+    image: italiangrid/storm-deployment:centos6
+    entrypoint: /bin/bash deploy.sh
+    environment:
+      STORM_DEPLOYMENT_TEST_BRANCH: ${STORM_DEPLOYMENT_TEST_BRANCH:-release_1_11_13}
+      MODE: ${MODE:-clean}
+      PLATFORM: ${PLATFORM:-centos6}
+      STORAGE_PREFIX: ${STORAGE_PREFIX:-/storage}
+    ports:
+      - 8080:8080
+      - 8085:8085
+      - 8443:8443
+      - 8444:8444
+      - 9998:9998
+    volumes_from:
+      - data
+    depends_on:
+      - data
+    networks:
+      cnaf.infn.it:
+        aliases:
+          - docker-storm.cnaf.infn.it
+
+volumes:
+  storage:
+    external:
+      name: storage
