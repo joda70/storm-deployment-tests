@@ -54,10 +54,9 @@ trap cleanup EXIT SIGINT SIGTERM SIGABRT
 
 cd docker
 docker network create cnaf.infn.it
-docker-compose up -d 
+docker-compose up --abort-on-container-exit 
 
 set +e
-docker-compose logs -f
 
 ts_ec=$(docker inspect docker-storm-testsuite -f '{{.State.ExitCode}}')
 
