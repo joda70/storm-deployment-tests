@@ -53,6 +53,7 @@ function cleanup(){
 trap cleanup EXIT SIGINT SIGTERM SIGABRT
 
 cd docker
+docker network create cnaf.infn.it
 docker-compose up -d 
 
 set +e

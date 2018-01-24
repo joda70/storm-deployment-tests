@@ -1,15 +1,14 @@
-version: '2.2'
+version: '3.4'
+
+volumes:
+  storage:
 
 networks:
   cnaf.infn.it:
-    name: cnaf.infn.it
+    external:
+      name: cnaf.infn.it
 
 services:
-
-  storage:
-    image: busybox
-    volumes:
-      - ${STORAGE_PREFIX:-/storage}
 
   docker-storm-testsuite:
     container_name: docker-storm-testsuite
@@ -43,8 +42,10 @@ services:
       - 8443:8443
       - 8444:8444
       - 9998:9998
-    volumes_from:
-      - storage
+    volumes:
+      - type: volume
+        source: storage
+        target: ${STORAGE_PREFIX:-/storage}
     networks:
       cnaf.infn.it:
         aliases:
