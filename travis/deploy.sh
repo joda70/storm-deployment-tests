@@ -7,6 +7,9 @@ TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-0}
 TRAVIS_JOB_NUMBER=${TRAVIS_JOB_NUMBER:-0}
 REPORT_REPO_URL=${REPORT_REPO_URL:-}
 
+docker --version
+docker-compose --version
+
 reports_dir=./reports
 
 function tar_reports_and_logs(){
