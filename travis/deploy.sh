@@ -28,7 +28,7 @@ function upload_reports_and_logs() {
       echo "Skipping report upload: REPORT_REPO_URL is undefined or empty"
       return 0
     fi
-    REPORT_TARBALL_URL=${REPORT_REPO_URL}/${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}/reports.tar.gz
+    REPORT_TARBALL_URL=${REPORT_REPO_URL}/${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}/${MODE}/reports.tar.gz
     curl --user "${REPORT_REPO_USERNAME}:${REPORT_REPO_PASSWORD}" \
       --upload-file reports.tar.gz \
       ${REPORT_TARBALL_URL}
