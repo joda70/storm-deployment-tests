@@ -11,9 +11,8 @@ services:
     dns_search: cnaf.infn.it
     hostname: docker-storm-testsuite.cnaf.infn.it
     image: italiangrid/storm-testsuite:latest
-    environment:
-      TESTSUITE_BRANCH: ${TESTSUITE_BRANCH:-master}
-      TESTSUITE_EXCLUDE: ${TESTSUITE_EXCLUDE:-to-be-fixedORno-btrfsORcdmi}
+    env_file:
+    - storm-testsuite.env
     depends_on:
       - docker-storm
     networks:
@@ -27,10 +26,8 @@ services:
     hostname: docker-storm.cnaf.infn.it
     image: italiangrid/storm-deployment:centos6
     entrypoint: /bin/bash deploy.sh
-    environment:
-      STORM_DEPLOYMENT_TEST_BRANCH: ${STORM_DEPLOYMENT_TEST_BRANCH:-release_1_11_13}
-      MODE: ${MODE:-clean}
-      PLATFORM: ${PLATFORM:-centos6}
+    env_file:
+    - storm-deployment.env
     ports:
       - 8080:8080
       - 8085:8085
