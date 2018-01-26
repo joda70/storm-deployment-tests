@@ -1,12 +1,8 @@
-version: '3.4'
-
-volumes:
-  storage:
+version: '2.1'
 
 networks:
-  cnaf.infn.it:
-    external:
-      name: cnaf.infn.it
+  default:
+    name: cnaf.infn.it
 
 services:
 
@@ -21,7 +17,7 @@ services:
     depends_on:
       - docker-storm
     networks:
-      cnaf.infn.it:
+      default:
         aliases:
           - docker-storm-testsuite.cnaf.infn.it
 
@@ -35,18 +31,13 @@ services:
       STORM_DEPLOYMENT_TEST_BRANCH: ${STORM_DEPLOYMENT_TEST_BRANCH:-release_1_11_13}
       MODE: ${MODE:-clean}
       PLATFORM: ${PLATFORM:-centos6}
-      STORAGE_PREFIX: ${STORAGE_PREFIX:-/storage}
     ports:
       - 8080:8080
       - 8085:8085
       - 8443:8443
       - 8444:8444
       - 9998:9998
-    volumes:
-      - type: volume
-        source: storage
-        target: ${STORAGE_PREFIX:-/storage}
     networks:
-      cnaf.infn.it:
+      default:
         aliases:
           - docker-storm.cnaf.infn.it
