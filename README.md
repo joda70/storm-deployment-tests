@@ -39,7 +39,7 @@ MODE=clean
 PLATFORM=centos6
 ```
 
-#### Launch
+**Launch**
 
 Run deployment using docker-compose:
 
