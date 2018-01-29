@@ -6,6 +6,7 @@ TRAVIS_REPO_SLUG=${TRAVIS_REPO_SLUG:-italiangrid/storm-deployment-test}
 TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-0}
 TRAVIS_JOB_NUMBER=${TRAVIS_JOB_NUMBER:-0}
 REPORT_REPO_URL=${REPORT_REPO_URL:-}
+MODE=${MODE:-clean}
 
 docker --version
 docker-compose --version
@@ -54,7 +55,7 @@ trap cleanup EXIT SIGINT SIGTERM SIGABRT
 
 cd docker
 docker network create cnaf.infn.it
-docker-compose up --abort-on-container-exit 
+docker-compose up -e MODE=${MODE} --abort-on-container-exit 
 
 set +e
 
