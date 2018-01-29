@@ -53,9 +53,10 @@ function cleanup(){
 
 trap cleanup EXIT SIGINT SIGTERM SIGABRT
 
+export MODE=${MODE}
 cd docker
 docker network create cnaf.infn.it
-docker-compose up -e MODE=${MODE} --abort-on-container-exit 
+docker-compose up --abort-on-container-exit 
 
 set +e
 

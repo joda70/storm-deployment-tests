@@ -26,6 +26,8 @@ services:
     hostname: docker-storm.cnaf.infn.it
     image: italiangrid/storm-deployment:centos6
     entrypoint: /bin/bash deploy.sh
+    environment:
+      - MODE
     env_file:
     - storm-deployment.env
     ports:
