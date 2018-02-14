@@ -15,9 +15,13 @@ env:
   - MODE=clean
   - MODE=update
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
 script:
 - bash travis/deploy.sh
+notifications:
+  slack:
+    rooms:
+      secure: nNK0tM9+hFKVF50b6yeSgCIdhKjfUlTphO5BIIrtjiJWmTM9J119eVLwN40q851xGeNyu3NdAQyexQ1UM4nDgK/xYlZGcdUZrTlC3O/hGspDEy1NjBytFG9AmIfkHcA9p0+4DYE71UzoWauvfZYAZKmLXeTt8MRcpbo4e9LuojJx62dYWz5+iymBO1FEPNkf+fPFMAxvwJxPzIDjDBwzKgVMFRnIvCz0RuNqr/qeqtdKfKKVQ1/pC9GyyvbHLLdRgmEFaLFiuWknIIySGvG6PpvET4WfNkBTib6f1m9DQ8d5b+KqEkH5LrK+pEjaZWurjylbMvLpuXvSvS5+A0VYqGzSPSfqbFcEo6C7CozWdcF085lNw1S67Eo5j5EyRyjlbWAGZCePrhUnZlqgrMPTirB6Y9NJqrozfo2ZwZGZzQNWZIfl4ABPWjGgjBXhdzDyG2Fy84ajl5fvAFDCCAh/wJaUsTVbwrNkL7MnCtn22Ci/FRwpPz1fjoo9MmZn2U4AIAeiAsRXi7x6pnox9HHeAavl3LIPcgi0OzMXAvCvIlnxkHQ2iZcLhccHB/IvN8K6gdGDwI/cDjuQXwEuncz+0PCyhqGCbDFV9T7X8kplvLw0j+pl8jOBbrAtb72qPh1UggeaYpRid6YpiszLY7+eIR1HFjTYrqx8AENhsVTz9/A=
