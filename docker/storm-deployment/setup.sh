@@ -37,5 +37,9 @@ cp /storm-certificates/docker_storm_cnaf_infn_it.cert.pem /etc/grid-security/hos
 cp /storm-certificates/docker_storm_cnaf_infn_it.key.pem /etc/grid-security/hostkey.pem
 chmod 400 /etc/grid-security/hostkey.pem
 chmod 644 /etc/grid-security/hostcert.pem
+mkdir /etc/grid-security/vomsdir
+mkdir /etc/grid-security/vomsdir/test.vo
 
+cp /vomsdir/test.vo/voms.example.lsc /etc/grid-security/vomsdir/test.vo/voms.example.lsc
+cp /vomsdir/test.vo.2/voms.example.lsc /etc/grid-security/vomsdir/test.vo.2/voms.example.lsc
 service rsyslog start
