@@ -7,8 +7,8 @@ COPY setup.sh /setup.sh
 RUN chmod +x /setup.sh
 RUN /setup.sh
 
-COPY vomsdir/test.vo/voms.example.lsc /etc/grid-security/vomsdir/test.vo/
-COPY vomsdir/test.vo.2/voms.example.lsc /etc/grid-security/vomsdir/test.vo.2/
+#COPY vomsdir/test.vo/voms.example.lsc /etc/grid-security/vomsdir/test.vo/
+#COPY vomsdir/test.vo.2/voms.example.lsc /etc/grid-security/vomsdir/test.vo.2/
 
 RUN adduser -d /home/tester tester
 COPY run_testsuite.sh /home/tester
